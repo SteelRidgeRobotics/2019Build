@@ -30,7 +30,7 @@ void DriveWithJoysticks::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void DriveWithJoysticks::Execute() {
-
+    Robot::drivetrain->userDrive(Robot::oi->getDriveController());
 }
 
 // Make this return true when this Command no longer needs to run execute()
