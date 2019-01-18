@@ -279,7 +279,7 @@ Properties:
     validators: null, value: 'C:\Users\2018PowerUp\'}
   Export Directory: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Steel
       Ridge Robotics\FRCProjects', extension: null, folder: true, name: Export Directory,
-    validators: null, value: ..\}
+    validators: null, value: .\}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
     name: Autonomous Command, type: Command, validators: null, value: Autonomous Command}
 Base: Robot
