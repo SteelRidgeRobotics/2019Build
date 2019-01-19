@@ -47,3 +47,32 @@ void DriveTrain::Periodic() {
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
+void DriveTrain::userDrive(std::shared_ptr<frc::Joystick>DriverController)
+
+{
+
+    double left_y = -1*DriverController->GetRawAxis(1);
+    double right_y = DriverController->GetRawAxis(5);
+    int l_bump = DriverController->GetRawButton(5);
+
+    if (fabs(left_y) < 0.1) {
+        left_y = 0;
+    }
+
+    if (fabs(right_y) < 0.1 ) {
+        right_y = 0;
+    }
+
+    if (l_bump == 1) {
+        left_y = 0.6*DriverController->GetRawAxis(1);
+        right_y = 0.6*DriverController->GetRawAxis(5);
+
+    }
+
+    frontLeft->Set(left_y);
+    backLeft->Set(left_y);
+    frontRight->Set(right_y);
+    backRight->Set(right_y);
+
+
+}
