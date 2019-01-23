@@ -47,9 +47,9 @@ void Arm::Periodic() {
 void Arm::userArm(std::shared_ptr<frc::Joystick>SystemsController)
 {
 
-    int ArmJoyNum; 
+    int ArmJoyNum = 1; 
 
-    double left_y = 0.5*SystemsController->GetRawAxis(ArmJoyNum);
+    double left_y = -0.5*SystemsController->GetRawAxis(ArmJoyNum);
 
     if(fabs(left_y) < 0.1)
     {
