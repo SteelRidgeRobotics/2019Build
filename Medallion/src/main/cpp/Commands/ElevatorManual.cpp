@@ -29,6 +29,8 @@ void ElevatorManual::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void ElevatorManual::Execute() {
 
+Robot::elevator->userElevate(Robot::oi->getSystemsController());
+
 }
 
 // Make this return true when this Command no longer needs to run execute()

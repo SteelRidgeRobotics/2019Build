@@ -44,3 +44,13 @@ void Elevator::Periodic() {
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
+void Elevator::userElevate(std::shared_ptr<frc::Joystick>SystemsController){
+    double right_y = 0.5*SystemsController->GetRawAxis(5);
+
+    if(fabs(right_y) < 0.1){
+        right_y = 0;
+    }
+
+    elevatorMotor->Set(ControlMode::PercentOutput, right_y);
+}
+
