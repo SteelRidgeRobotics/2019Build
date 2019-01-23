@@ -23,11 +23,13 @@ DriveWithJoystick::DriveWithJoystick(): frc::Command() {
 
 // Called just before this Command runs the first time
 void DriveWithJoystick::Initialize() {
-
+	
 }
 
 // Called repeatedly when this Command is scheduled to run
 void DriveWithJoystick::Execute() {
+
+Robot::driveTrain->userDrive(Robot::oi->getDriveController());
 
 }
 
@@ -39,10 +41,16 @@ bool DriveWithJoystick::IsFinished() {
 // Called once after isFinished returns true
 void DriveWithJoystick::End() {
 
+
+Cancel();
+
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void DriveWithJoystick::Interrupted() {
+
+Cancel();
+End();
 
 }
