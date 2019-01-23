@@ -29,6 +29,8 @@ void ArmManual::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void ArmManual::Execute() {
 
+Robot::arm->userArm(Robot::oi->getSystemsController());
+
 }
 
 // Make this return true when this Command no longer needs to run execute()

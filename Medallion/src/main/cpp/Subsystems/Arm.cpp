@@ -44,3 +44,18 @@ void Arm::Periodic() {
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
+void Arm::userArm(std::shared_ptr<frc::Joystick>SystemsController)
+{
+
+    int ArmJoyNum; 
+
+    double left_y = 0.5*SystemsController->GetRawAxis(ArmJoyNum);
+
+    if(fabs(left_y) < 0.1)
+    {
+        left_y = 0;
+    }
+
+    armMotor->Set(ControlMode::PercentOutput, left_y);
+
+}
