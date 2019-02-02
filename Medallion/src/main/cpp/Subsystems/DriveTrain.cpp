@@ -38,7 +38,7 @@ DriveTrain::DriveTrain() : frc::Subsystem("DriveTrain") {
     backRight->SetNeutralMode(NeutralMode::Brake);
     frontRight->SetNeutralMode(NeutralMode::Brake);
 
-
+    
 }
 
 void DriveTrain::InitDefaultCommand() {
@@ -67,10 +67,19 @@ void DriveTrain::Periodic() {
 void DriveTrain::userDrive(std::shared_ptr<frc::Joystick>DriveController)
 
 {
-
+    std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
     double left_y = -1*DriveController->GetRawAxis(1);
     double right_y = -1*DriveController->GetRawAxis(5);
     int l_bump = DriveController->GetRawButton(5);
+    int r_bump = DriveController->GetRawButton(6);
+    double tx = table->GetNumber("tx",0.0);
+    double ty = table->GetNumber("ty",0.0);      
+    double left_command = 0.0;
+    double right_command = 0.0;
+    double KpAim = 0.001;
+    double steering_adjust = 0.0;
+;
+    
 
     if (fabs(left_y) < 0.1) {
         left_y = 0;
@@ -86,10 +95,30 @@ void DriveTrain::userDrive(std::shared_ptr<frc::Joystick>DriveController)
 
     }
 
-    
-
     frontLeft->Set(ControlMode::PercentOutput, left_y);
     frontRight->Set(ControlMode::PercentOutput, right_y);
 
+// Vision Tracking 
+    if(r_bump==1) {
+
+
+if (ty == 0.0)
+{
+        // We don't see the target, seek for the target by spinning in place at a safe speed.
+        steering_adjust = 0.3;
+}
+else
+{
+        // We do see the target, execute aiming code
+        double heading_error = tx;
+        steering_adjust = KpAim * tx;
+}
+
+left_command+=steering_adjust;
+right_command-=steering_adjust;
+
+    frontLeft->Set(ControlMode::PercentOutput, left_command);
+    frontRight->Set(ControlMode::PercentOutput, right_command);
+}
 
 } 

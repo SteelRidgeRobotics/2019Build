@@ -14,6 +14,11 @@
 #include "frc/commands/Subsystem.h"
 #include "frc/WPILib.h"
 #include "ctre/Phoenix.h"
+#include "frc/smartdashboard/Smartdashboard.h"
+#include "networktables/NetworkTable.h"
+#include "networktables/NetworkTableInstance.h"
+#include "networktables/NetworkTableEntry.h"
+
 
 /**
  *
