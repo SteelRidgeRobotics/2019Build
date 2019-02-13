@@ -94,8 +94,9 @@ void Elevator::encoderDone()
     elevatorMotor->Set(ControlMode::PercentOutput, 0.0);
 }
 
-double Elevator::goToDesiredPos()
+double Elevator::inchesToRotations(double inches)
 {
-    double currentPosition = elevatorMotor->GetSelectedSensorPosition();
 
+    return inches; //... we need to figure out how to convert rotations into inches to do this conversion
 }
+

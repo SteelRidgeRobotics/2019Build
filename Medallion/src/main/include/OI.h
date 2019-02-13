@@ -25,6 +25,8 @@ private:
 	
 	
 	std::shared_ptr<frc::Joystick> systemsController;
+	std::shared_ptr<frc::JoystickButton> x;
+	std::shared_ptr<frc::JoystickButton> a;
 	std::shared_ptr<frc::JoystickButton> y;
 	std::shared_ptr<frc::Joystick> driveController;
 

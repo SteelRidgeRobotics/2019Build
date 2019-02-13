@@ -140,10 +140,10 @@ Children:
   - Children: []
     Properties:
       Number: !!robotbuilder.data.properties.ChoicesProperty
-        choices: &id006 ['0', '1', '2', '3', '4', '5']
+        choices: &id009 ['0', '1', '2', '3', '4', '5']
         default: 1
         name: Number
-        validators: &id007 [Joystick]
+        validators: &id010 [Joystick]
         value: '0'
     Base: Joystick
     Name: DriveController
@@ -160,9 +160,9 @@ Children:
           - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: Inches,
             type: double, value: '0'}
         Button: !!robotbuilder.data.properties.ChoicesProperty
-          choices: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',
-            '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24',
-            '25', '26', '27', '28', '29', '30', '31', '32']
+          choices: &id006 ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
+            '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23',
+            '24', '25', '26', '27', '28', '29', '30', '31', '32']
           default: '1'
           name: Button
           validators: null
@@ -171,22 +171,80 @@ Children:
           default: None
           name: Command
           type: Command
-          validators: [TypeDropdownSelected]
+          validators: &id007 [TypeDropdownSelected]
           value: ElevatorUp
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
-          choices: [whileHeld, whenPressed, whenReleased]
+          choices: &id008 [whileHeld, whenPressed, whenReleased]
           default: whileHeld
           name: When to Run
           validators: null
           value: whenPressed
       Base: Joystick Button
       Name: Y
+    - Children: []
+      Properties:
+        Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
+          name: Joystick, validators: null, value: SystemsController}
+        Parameters: !!robotbuilder.data.properties.ParametersProperty
+          default: []
+          name: Parameters
+          validators: null
+          value: []
+        Button: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id006
+          default: '1'
+          name: Button
+          validators: null
+          value: '1'
+        Command: !!robotbuilder.data.properties.TypeSelectionProperty
+          default: None
+          name: Command
+          type: Command
+          validators: *id007
+          value: ElevatorDown
+        When to Run: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id008
+          default: whileHeld
+          name: When to Run
+          validators: null
+          value: whenPressed
+      Base: Joystick Button
+      Name: A
+    - Children: []
+      Properties:
+        Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
+          name: Joystick, validators: null, value: SystemsController}
+        Parameters: !!robotbuilder.data.properties.ParametersProperty
+          default: []
+          name: Parameters
+          validators: null
+          value: []
+        Button: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id006
+          default: '1'
+          name: Button
+          validators: null
+          value: '3'
+        Command: !!robotbuilder.data.properties.TypeSelectionProperty
+          default: None
+          name: Command
+          type: Command
+          validators: *id007
+          value: ElevatorEncoderReset
+        When to Run: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id008
+          default: whileHeld
+          name: When to Run
+          validators: null
+          value: whenPressed
+      Base: Joystick Button
+      Name: X
     Properties:
       Number: !!robotbuilder.data.properties.ChoicesProperty
-        choices: *id006
+        choices: *id009
         default: 1
         name: Number
-        validators: *id007
+        validators: *id010
         value: '1'
     Base: Joystick
     Name: SystemsController
@@ -297,10 +355,10 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: Elevator}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id008 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id008
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
@@ -317,12 +375,12 @@ Children:
       Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Run When Disabled, validators: null, value: false}
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
-        name: Requires, type: Subsystem, validators: null, value: None}
+        name: Requires, type: Subsystem, validators: null, value: Elevator}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id009 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id009
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
@@ -341,10 +399,10 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: Elevator}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id010 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id010
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command

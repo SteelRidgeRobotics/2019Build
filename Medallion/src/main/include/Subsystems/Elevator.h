@@ -65,7 +65,6 @@ public:
 
 	double inchesToRotations(double inches);
 
-	double goToDesiredPos();
 };
 
 #endif
