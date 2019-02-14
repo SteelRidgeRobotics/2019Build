@@ -55,6 +55,12 @@ public:
 
 	static constexpr double MAX = 0;
 
+	static const int kGearRatio = 5;
+
+	static const int kSensorUnitsPerRotation = 80;
+
+	static const int kTimeoutMS = 30;
+
 	void userElevate(std::shared_ptr<frc::Joystick>SystemsController);
 
 	void encoderReset();
@@ -65,6 +71,11 @@ public:
 
 	double inchesToRotations(double inches);
 
+	double findDistance(double inches);
+
+	void motionMagic(double rotations);
+
+	void elevatorDown();
 };
 
 #endif

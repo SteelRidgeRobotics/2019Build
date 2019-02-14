@@ -28,20 +28,25 @@ Elevator::Elevator() : frc::Subsystem("Elevator") {
      height_Pos = 0.0;
      elevatorMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, 10);
      elevatorMotor->SetSensorPhase(true); //NEEDS TO BE LOOKED INTO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     elevatorMotor->SetInverted(false); // !!!!!!!
      elevatorMotor->SetStatusFramePeriod(StatusFrameEnhanced::Status_13_Base_PIDF0, 10, 10);
-     elevatorMotor->SetStatusFramePeriod(StatusFrameEnhanced::Status_10_MotionMagic, 10, 30);
-     elevatorMotor->ConfigNominalOutputForward(0, 30);
-     elevatorMotor->ConfigNominalOutputReverse(0, 30);
-     elevatorMotor->ConfigPeakOutputForward(1, 30);
-     elevatorMotor->ConfigPeakOutputReverse(-1, 30);
+     elevatorMotor->SetStatusFramePeriod(StatusFrameEnhanced::Status_10_MotionMagic, 10, kTimeoutMS);
+     elevatorMotor->ConfigNominalOutputForward(0, kTimeoutMS);
+     elevatorMotor->ConfigNominalOutputReverse(0, kTimeoutMS);
+     elevatorMotor->ConfigPeakOutputForward(1, kTimeoutMS);
+     elevatorMotor->ConfigPeakOutputReverse(-1, kTimeoutMS);
      elevatorMotor->SelectProfileSlot(0, 0);
-     elevatorMotor->Config_kF(0, 0, 30);//these guys need to be set too!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     elevatorMotor->Config_kP(0, 0, 30);    //!
-     elevatorMotor->Config_kI(0, 0, 30);    //!!
-     elevatorMotor->Config_kD(0, 0, 30);    //!!! 
-     elevatorMotor->ConfigMotionCruiseVelocity(0, 30); //!!!!
-     elevatorMotor->ConfigMotionAcceleration(0, 30); //!!!!!
-     elevatorMotor->SetSelectedSensorPosition(0, 0, 30); //look into the first value (initial sensor position)
+     elevatorMotor->Config_kF(0, 0, kTimeoutMS);//these guys need to be set too!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     elevatorMotor->Config_kP(0, 0, kTimeoutMS);    //!
+     elevatorMotor->Config_kI(0, 0, kTimeoutMS);    //!!
+     elevatorMotor->Config_kD(0, 0, kTimeoutMS);    //!!! 
+     elevatorMotor->ConfigMotionCruiseVelocity(0, kTimeoutMS); //!!!!
+     elevatorMotor->ConfigMotionAcceleration(0, kTimeoutMS); //!!!!!
+     elevatorMotor->SetSelectedSensorPosition(0, 0, kTimeoutMS); //look into the first value (initial sensor position)
+     elevatorMotor->ConfigForwardSoftLimitThreshold(10000, kTimeoutMS);
+     elevatorMotor->ConfigReverseSoftLimitThreshold(-10000, kTimeoutMS);
+     elevatorMotor->ConfigClearPositionOnLimitR(true, kTimeoutMS);
+    
 
 }
 
@@ -83,7 +88,7 @@ void Elevator::userElevate(std::shared_ptr<frc::Joystick>SystemsController){
 void Elevator::encoderReset()
 {
 
-    elevatorMotor->SetSelectedSensorPosition(0, 0, 30); //NEEDS TO BE SET
+    elevatorMotor->SetSelectedSensorPosition(0, 0, kTimeoutMS); //NEEDS TO BE SET
 
     height_Pos = 0;
 
@@ -97,6 +102,33 @@ void Elevator::encoderDone()
 double Elevator::inchesToRotations(double inches)
 {
 
-    return inches; //... we need to figure out how to convert rotations into inches to do this conversion
+    return inches*kGearRatio*kSensorUnitsPerRotation; //... we need to figure out how to convert rotations into inches to do this conversion
 }
 
+double Elevator::findDistance(double inches)
+{
+
+    double currentPosition = elevatorMotor->GetSelectedSensorPosition();
+    double desiredPosition = inchesToRotations(inches);
+    double positionDifference = desiredPosition - currentPosition;
+
+    if(!(positionDifference <= 0.0))
+    {
+        return positionDifference;
+    }
+
+    else
+    {
+        return 0.0;
+    }
+
+}
+
+void Elevator::motionMagic(double rotations){
+    elevatorMotor->Set(ControlMode::MotionMagic, rotations);
+}
+
+void Elevator::elevatorDown()
+{
+    elevatorMotor->Set(ControlMode::PercentOutput, -.1);
+}

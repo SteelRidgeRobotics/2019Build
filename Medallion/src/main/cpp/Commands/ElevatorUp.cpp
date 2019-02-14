@@ -30,7 +30,8 @@ void ElevatorUp::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ElevatorUp::Execute() {
-
+    double distance = Robot::elevator->findDistance(m_Inches);
+    Robot::elevator->motionMagic(distance);
 }
 
 // Make this return true when this Command no longer needs to run execute()
