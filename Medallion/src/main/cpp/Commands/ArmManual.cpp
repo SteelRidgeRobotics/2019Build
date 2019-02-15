@@ -48,4 +48,7 @@ void ArmManual::End() {
 // subsystems is scheduled to run
 void ArmManual::Interrupted() {
 
+    Cancel();
+    End();
+
 }

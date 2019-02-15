@@ -48,4 +48,7 @@ void ElevatorManual::End() {
 // subsystems is scheduled to run
 void ElevatorManual::Interrupted() {
 
+    Cancel();
+    End();
+
 }
