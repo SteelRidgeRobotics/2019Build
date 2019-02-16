@@ -119,6 +119,28 @@ right_command-=steering_adjust;
 
     frontLeft->Set(ControlMode::PercentOutput, left_command);
     frontRight->Set(ControlMode::PercentOutput, right_command);
+
+    if(!r_bump == 1)
+
+    {
+
+        table->PutNumber("ledMode", 0);
+
+        table->PutNumber("camMode", 1);
+
+        //nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("ledMode", 0); //keep the leds off while not in use
+
+        //nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("camMode", 1); //have the camera in driver mode(no processing) while not used for tracking
+    }
+
+    else
+    {   
+        table->PutNumber("ledMode", 3); //turn on the led for tracking
+
+        table->PutNumber("camMode", 0); //set the camera in tracking mode
+
+    }
+    
 }
 
 } 
