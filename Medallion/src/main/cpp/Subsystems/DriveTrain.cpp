@@ -120,7 +120,7 @@ right_command-=steering_adjust;
     frontLeft->Set(ControlMode::PercentOutput, left_command);
     frontRight->Set(ControlMode::PercentOutput, right_command);
 
-    if(!r_bump == 1)
+    if(r_bump != 1)
 
     {
 
