@@ -29,7 +29,6 @@ private:
 	
 	
 	
-	
 	std::shared_ptr<frc::Joystick> systemsController;
 	std::shared_ptr<frc::JoystickButton> rJoyBn;
 	std::shared_ptr<frc::JoystickButton> lJoyBn;
