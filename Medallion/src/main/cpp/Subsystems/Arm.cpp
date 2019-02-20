@@ -104,7 +104,6 @@ double Arm::findDistance(double rotations)
 {
 
     double currentPosition = armMotor->GetSelectedSensorPosition();
-
     double positionDifference = rotations - currentPosition;
 
     if(!(positionDifference <= 0.0))
