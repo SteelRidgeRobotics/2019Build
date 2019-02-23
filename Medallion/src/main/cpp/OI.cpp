@@ -26,6 +26,8 @@
 #include "Commands/ElevatorHomeUp.h"
 #include "Commands/ElevatorManual.h"
 #include "Commands/ElevatorUp.h"
+#include "Commands/LimeLightTrack.h"
+#include "Commands/LimelightOff.h"
 #include "Commands/PusherIn.h"
 #include "Commands/PusherOut.h"
 
@@ -50,15 +52,19 @@ OI::OI() {
     a.reset(new frc::JoystickButton(systemsController.get(), 1));
     a->WhenPressed(new ArmDown());
     b.reset(new frc::JoystickButton(systemsController.get(), 2));
-    b->WhenPressed(new ArmUp(0));
+    //b->WhenPressed(new ArmUp(0));
     x.reset(new frc::JoystickButton(systemsController.get(), 3));
     x->WhenPressed(new ElevatorDown());
     y.reset(new frc::JoystickButton(systemsController.get(), 4));
-    y->WhenPressed(new ElevatorUp(0));
+    //y->WhenPressed(new ElevatorUp(0));
     driveController.reset(new frc::Joystick(0));
     
+    dRBump.reset(new frc::JoystickButton(driveController.get(), 8));
+    dRBump->WhileHeld(new LimeLightTrack());
 
     // SmartDashboard Buttons
+    frc::SmartDashboard::PutData("LimelightOff", new LimelightOff());
+    frc::SmartDashboard::PutData("LimeLightTrack", new LimeLightTrack());
     frc::SmartDashboard::PutData("ElevatorHome", new ElevatorHome());
     frc::SmartDashboard::PutData("PusherIn", new PusherIn());
     frc::SmartDashboard::PutData("PusherOut", new PusherOut());
