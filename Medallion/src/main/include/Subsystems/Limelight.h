@@ -42,6 +42,9 @@ public:
 
 static constexpr double CAMERAHEIGHT = 0.0;
 
+static constexpr double CAMERAANGOFFSET = 10;
+
+static constexpr double TARGETHEIGHT = 28.59; // we need to find out what this is
 bool getTv();
 
 double getTx();

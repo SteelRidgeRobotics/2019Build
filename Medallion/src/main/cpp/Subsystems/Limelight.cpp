@@ -89,6 +89,8 @@ double Limelight::getTa()
 double Limelight::getTs()
 {
     double ts = table->GetNumber("ts", 0.0);
+
+    return ts;
 }
 
 double Limelight::getDistance() //d = (h2(height of obj)-h1(height of camera)) / tan(a1(ang above)+a2(ang below to ground))
@@ -96,10 +98,10 @@ double Limelight::getDistance() //d = (h2(height of obj)-h1(height of camera)) /
 {
 
 double h1 = CAMERAHEIGHT;
-double h2 = 0;
+double h2 = TARGETHEIGHT;
 double hDif = h2 - h1;
-double a1 = 0;
-double a2 = 0;
+double a1 = CAMERAANGOFFSET;
+double a2 = getTy();
 double aSum = a1 + a2; 
 
 double distance = (hDif) / tan(aSum);
@@ -110,15 +112,15 @@ return distance;
 
 void Limelight::setCameraMode(int input)
 {
-    table->PutNumber("limelight", input);
+    table->PutNumber("cameraMode", input);
 }
 
 void Limelight::setLedMode(int input)
 {
-    table->PutNumber("limelight", input);
+    table->PutNumber("ledMode", input);
 }
 
 void Limelight::setPipeline(int input)
 {
-    table->PutNumber("limelight", input);
+    table->PutNumber("pipeline", input);
 }
