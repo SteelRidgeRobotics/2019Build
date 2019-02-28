@@ -28,7 +28,7 @@ void LimeLightTrack::Initialize() {
 
 
 
-Robot::limelight->setCamMode(0);
+Robot::limelight->setCameraMode(0);
 Robot::limelight->setLedMode(3);
 Robot::limelight->setPipeline(1);
  
