@@ -75,14 +75,7 @@ void DriveTrain::userDrive(std::shared_ptr<frc::Joystick>DriveController)
     double right_y = -1*DriveController->GetRawAxis(5);
     int l_bump = DriveController->GetRawButton(5);
     int r_bump = DriveController->GetRawButton(6);
-    /*
-    double left_command = 0.0;
-    double right_command = 0.0;
-    double KpAim = 0.001;
-    double KpDistance = 0.001;
-    double steering_adjust = 0.0;
-    double distance_adjust = 0.0;
-    */
+
     
 
     if (fabs(left_y) < 0.1) {
@@ -103,3 +96,9 @@ void DriveTrain::userDrive(std::shared_ptr<frc::Joystick>DriveController)
     frontRight->Set(ControlMode::PercentOutput, right_y);
 
    } 
+
+
+void DriveTrain::setMotors(double leftspeed, double rightspeed){
+    frontLeft->Set(ControlMode::PercentOutput, leftspeed);
+    frontRight->Set(ControlMode::PercentOutput, rightspeed);
+   }
