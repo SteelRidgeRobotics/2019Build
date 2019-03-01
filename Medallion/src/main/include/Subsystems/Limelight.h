@@ -63,6 +63,7 @@ void setLedMode(int input);
 
 void setPipeline(int input);
 
+void visionAssist();
 };
 
 #endif
