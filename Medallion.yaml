@@ -282,7 +282,7 @@ Children:
           default: '1'
           name: Button
           validators: null
-          value: '8'
+          value: '6'
         Command: !!robotbuilder.data.properties.TypeSelectionProperty
           default: None
           name: Command
@@ -1090,11 +1090,12 @@ Properties:
     name: Export Subsystems, validators: null, value: true}
   Simulation World File: !!robotbuilder.data.properties.StringProperty {default: /usr/share/frcsim/worlds/GearsBotDemo.world,
     name: Simulation World File, validators: null, value: /usr/share/frcsim/worlds/GearsBotDemo.world}
-  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\2018PowerUp\',
-    extension: null, folder: true, name: Wiring file location, validators: null, value: 'C:\Users\Steel
-      Ridge Robotics\'}
-  Export Directory: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\2018PowerUp\FRCProjects',
-    extension: null, folder: true, name: Export Directory, validators: null, value: .\}
+  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Steel
+      Ridge Robotics\', extension: null, folder: true, name: Wiring file location,
+    validators: null, value: 'C:\Users\Steel Ridge Robotics\'}
+  Export Directory: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\Steel
+      Ridge Robotics\FRCProjects', extension: null, folder: true, name: Export Directory,
+    validators: null, value: .\}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
     name: Autonomous Command, type: Command, validators: null, value: ElevatorHome}
 Base: Robot
