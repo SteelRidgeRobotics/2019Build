@@ -57,7 +57,7 @@ else{
     }
 
 left_command+=steering_adjust + distance_adjust;
-right_command-=steering_adjust + distance_adjust;
+right_command-=steering_adjust = distance_adjust;
 
 Robot::driveTrain->setMotors(left_command, right_command);
 
@@ -65,7 +65,7 @@ Robot::driveTrain->setMotors(left_command, right_command);
 
 // Make this return true when this Command no longer needs to run execute()
 bool LimeLightTrack::IsFinished() {
-    return true;
+    return false;
 }
 
 // Called once after isFinished returns true

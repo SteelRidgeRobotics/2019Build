@@ -61,7 +61,7 @@ OI::OI() {
     //y->WhenPressed(new ElevatorUp(0));
     driveController.reset(new frc::Joystick(0));
     
-    dRBump.reset(new frc::JoystickButton(driveController.get(), 8));
+    dRBump.reset(new frc::JoystickButton(driveController.get(), 6));
     dRBump->WhileHeld(new LimeLightTrack());
 
     // SmartDashboard Buttons

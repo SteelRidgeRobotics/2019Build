@@ -141,6 +141,7 @@ void Elevator::elevatorDown()
 double Elevator::getPosition(){
     double position = elevatorMotor->GetSelectedSensorPosition();
 
-    return rotationsToInches(position);
+    //return rotationsToInches(position);
+    return position;
 
 }
