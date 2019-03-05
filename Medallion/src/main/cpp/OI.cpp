@@ -75,7 +75,7 @@ OI::OI() {
     frc::SmartDashboard::PutData("ClawClose", new ClawClose());
     frc::SmartDashboard::PutData("ClawOpen", new ClawOpen());
     frc::SmartDashboard::PutData("ArmDown", new ArmDown());
-    //frc::SmartDashboard::PutData("ArmUp", new ArmUp()); 
+    //frc::SmartDashboard::PutData("ArmUp", new ArmUp());
     frc::SmartDashboard::PutData("ElevatorEncoderReset", new ElevatorEncoderReset());
     frc::SmartDashboard::PutData("ElevatorDown", new ElevatorDown());
     //frc::SmartDashboard::PutData("ElevatorUp", new ElevatorUp());
