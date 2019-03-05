@@ -41,9 +41,11 @@ Arm::Arm() : frc::Subsystem("Arm") {
     armMotor->ConfigMotionCruiseVelocity(0, kTimeoutMS); //!!!!
     armMotor->ConfigMotionAcceleration(0, kTimeoutMS); //!!!!!
     armMotor->SetSelectedSensorPosition(0, 0, kTimeoutMS); //look into the first value (initial sensor position)
-    armMotor->ConfigForwardSoftLimitThreshold(10000, kTimeoutMS);
-    armMotor->ConfigReverseSoftLimitThreshold(-10000, kTimeoutMS);
+    //armMotor->ConfigForwardSoftLimitThreshold(10000, kTimeoutMS);
+    //armMotor->ConfigReverseSoftLimitThreshold(-10000, kTimeoutMS);
     armMotor->ConfigClearPositionOnLimitR(true, kTimeoutMS);
+    armMotor->ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeoutMS);
+    armMotor->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeoutMS);
 }
 
 void Arm::InitDefaultCommand() {

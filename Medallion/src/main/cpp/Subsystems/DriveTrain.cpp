@@ -75,18 +75,7 @@ void DriveTrain::userDrive(std::shared_ptr<frc::Joystick>DriveController)
     double right_y = -1*DriveController->GetRawAxis(5);
     int l_bump = DriveController->GetRawButton(5);
     int r_bump = DriveController->GetRawButton(6);
-    /*
-    double tx = table->GetNumber("tx",0.0);
-    double ty = table->GetNumber("ty",0.0);  
-    double ta = table->GetNumber("ta", 0.0);
-    double tv = table->GetNumber("tv", 0.0);
-    double left_command = 0.0;
-    double right_command = 0.0;
-    double KpAim = 0.001;
-    double KpDistance = 0.001;
-    double steering_adjust = 0.0;
-    double distance_adjust = 0.0;
-    */
+
     
 
     if (fabs(left_y) < 0.1) {
@@ -106,39 +95,10 @@ void DriveTrain::userDrive(std::shared_ptr<frc::Joystick>DriveController)
     frontLeft->Set(ControlMode::PercentOutput, left_y);
     frontRight->Set(ControlMode::PercentOutput, right_y);
 
-    // Vision Tracking
-    /* //*********************************************************
-    if(r_bump==1) {
-        table->PutNumber("ledMode", 3); //turn on the led for tracking
+   } 
 
-        table->PutNumber("camMode", 0); //set the camera in tracking mode
 
-        if (tv == 0.0f) {
-            // We don't see the target, seek for the target by spinning in place at a safe speed.
-            steering_adjust = 0.3f;
-        }
-
-        else {
-            // We do see the target, execute seeking and distance code
-            double heading_error = tx;
-            steering_adjust = KpAim * heading_error;
-            float distance_adjust = KpDistance*(TARGET_AREA - ta);
-         
-            left_command+=steering_adjust + distance_adjust;
-            right_command-=steering_adjust + distance_adjust;
-
-            frontLeft->Set(ControlMode::PercentOutput, left_command);
-            frontRight->Set(ControlMode::PercentOutput, right_command); 
-        }
-      
-    }
-
-    else {
-
-        table->PutNumber("ledMode", 0);
-
-        table->PutNumber("camMode", 1);
-        
-    }
-    */ //**************************************************
-} 
+void DriveTrain::setMotors(double leftspeed, double rightspeed){
+    frontLeft->Set(ControlMode::PercentOutput, leftspeed);
+    frontRight->Set(ControlMode::PercentOutput, rightspeed);
+   }

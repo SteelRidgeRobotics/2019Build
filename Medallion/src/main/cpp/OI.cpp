@@ -56,7 +56,7 @@ OI::OI() {
     x.reset(new frc::JoystickButton(systemsController.get(), 3));
     x->WhenPressed(new ElevatorDown());
     y.reset(new frc::JoystickButton(systemsController.get(), 4));
-    //y->WhenPressed(new ElevatorUp(0));
+   //y->WhenPressed(new ElevatorUp(0));
     driveController.reset(new frc::Joystick(0));
     
     dRBump.reset(new frc::JoystickButton(driveController.get(), 8));
@@ -71,7 +71,7 @@ OI::OI() {
     frc::SmartDashboard::PutData("ClawClose", new ClawClose());
     frc::SmartDashboard::PutData("ClawOpen", new ClawOpen());
     frc::SmartDashboard::PutData("ArmDown", new ArmDown());
-    //frc::SmartDashboard::PutData("ArmUp", new ArmUp());
+   // frc::SmartDashboard::PutData("ArmUp", new ArmUp());
     frc::SmartDashboard::PutData("ElevatorEncoderReset", new ElevatorEncoderReset());
     frc::SmartDashboard::PutData("ElevatorDown", new ElevatorDown());
     //frc::SmartDashboard::PutData("ElevatorUp", new ElevatorUp());
