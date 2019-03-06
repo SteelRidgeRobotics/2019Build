@@ -66,8 +66,8 @@ void HabSki::habSkiMoveBackward()
 void HabSki::habSkiMoveForward()
 {
 
-    double driveTrigger = DriveController->GetRawAxis(4);
-    double systemTrigger = SystemsController->GetRawAxis(4);
+    double driveTrigger = DriveController->GetRawAxis(2);
+    double systemTrigger = SystemsController->GetRawAxis(2);
 
     if(driveTrigger > 0.8 && systemTrigger > 0.8)
     {
