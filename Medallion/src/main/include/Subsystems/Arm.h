@@ -70,6 +70,8 @@ public:
 	void motionMagic(double rotations);
 
 	void armDown();
+
+	double getPosition();
 	
 };
 

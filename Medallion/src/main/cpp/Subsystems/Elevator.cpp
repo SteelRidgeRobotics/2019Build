@@ -91,7 +91,7 @@ void Elevator::encoderReset()
 
     elevatorMotor->SetSelectedSensorPosition(0, 0, kTimeoutMS); //NEEDS TO BE SET
 
-    height_Pos = 0;
+    height_Pos = 0.0;
 
 }
 
@@ -131,6 +131,11 @@ double Elevator::findDistance(double inches)
 
 void Elevator::motionMagic(double rotations){
     elevatorMotor->Set(ControlMode::MotionMagic, rotations);
+}
+
+void Elevator::elevatorUp()
+{
+    elevatorMotor->Set(ControlMode::PercentOutput, .1);
 }
 
 void Elevator::elevatorDown()

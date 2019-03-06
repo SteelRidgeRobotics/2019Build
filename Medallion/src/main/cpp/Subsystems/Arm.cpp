@@ -139,3 +139,9 @@ void Arm::armDown()
 
 }
 
+double Arm::getPosition(){
+    double position = armMotor->GetSelectedSensorPosition();
+
+    return position;
+
+}

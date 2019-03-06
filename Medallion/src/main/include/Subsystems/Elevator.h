@@ -86,6 +86,8 @@ public:
 
 	void motionMagic(double rotations);
 
+	void elevatorUp();
+	
 	void elevatorDown();
 
 	double getPosition();

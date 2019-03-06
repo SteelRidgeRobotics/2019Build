@@ -25,9 +25,11 @@ LimelightOff::LimelightOff(): frc::Command() {
 // Called just before this Command runs the first time
 void LimelightOff::Initialize() {
 
-Robot::limelight->setCameraMode(1);
-Robot::limelight->setLedMode(1);
-Robot::limelight->setPipeline(0);
+    Robot::limelight->setCameraMode(1);
+    Robot::limelight->setLedMode(1);
+    Robot::limelight->setPipeline(0);
+    Robot::limelight->setStream(0);
+
 
 }
 

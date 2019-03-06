@@ -82,7 +82,9 @@ void Robot::AutonomousInit() {
 void Robot::AutonomousPeriodic() {
 	frc::Scheduler::GetInstance()->Run();
 
-	frc::SmartDashboard::PutNumber("Ele_Pos", Robot::elevator->getPosition());
+	//frc::SmartDashboard::PutNumber("Ele_Pos", Robot::elevator->getPosition());
+
+	TeleopPeriodic();
 }
 
 void Robot::TeleopInit() {
@@ -99,6 +101,10 @@ void Robot::TeleopPeriodic() {
 	frc::Scheduler::GetInstance()->Run();
 
 	frc::SmartDashboard::PutNumber("Ele_Pos", Robot::elevator->getPosition());
+
+	frc::SmartDashboard::PutNumber("Arm_Pos", Robot::arm->getPosition());
+
+
 }
 
 #ifndef RUNNING_FRC_TESTS
