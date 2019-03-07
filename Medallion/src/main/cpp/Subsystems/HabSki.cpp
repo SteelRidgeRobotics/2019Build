@@ -52,8 +52,8 @@ void HabSki::Periodic() {
 void HabSki::habSkiMoveBackward()
 {
     
-   double driveTrigger = DriveController->GetRawAxis(3);
-   double systemTrigger = SystemsController->GetRawAxis(3);
+   double driveTrigger = DriveController->GetRawButton(7);
+   double systemTrigger = SystemsController->GetRawButton(7);
 
    if(driveTrigger > 0.8 && systemTrigger >0.8){ 
     habSkiActuator->Set(ControlMode::PercentOutput, -0.5);
@@ -68,8 +68,8 @@ void HabSki::habSkiMoveBackward()
 void HabSki::habSkiMoveForward()
 {
 
-    double driveTrigger = DriveController->GetRawAxis(2);
-    double systemTrigger = SystemsController->GetRawAxis(2);
+    double driveTrigger = DriveController->GetRawButton(8);
+    double systemTrigger = SystemsController->GetRawButton(8);
 
     if(driveTrigger > 0.8 && systemTrigger > 0.8)
     {

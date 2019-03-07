@@ -43,8 +43,8 @@ Elevator::Elevator() : frc::Subsystem("Elevator") {
      elevatorMotor->ConfigMotionCruiseVelocity(350, kTimeoutMS); //!!!!
      elevatorMotor->ConfigMotionAcceleration(350, kTimeoutMS); //!!!!!
      elevatorMotor->SetSelectedSensorPosition(0, 0, kTimeoutMS); //look into the first value (initial sensor position)
-     //elevatorMotor->ConfigForwardSoftLimitThreshold(10000, kTimeoutMS);
-     //elevatorMotor->ConfigReverseSoftLimitThreshold(-10000, kTimeoutMS);
+     elevatorMotor->ConfigForwardSoftLimitThreshold(26200, kTimeoutMS);
+     //elevatorMotor->ConfigReverseSoftLimitThreshold(-10, kTimeoutMS);
      elevatorMotor->ConfigClearPositionOnLimitR(true, kTimeoutMS);
      elevatorMotor->ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeoutMS);
      elevatorMotor->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeoutMS);
@@ -75,7 +75,7 @@ void Elevator::Periodic() {
 // here. Call these from Commands.
 
 void Elevator::userElevate(std::shared_ptr<frc::Joystick>SystemsController){
-    double right_y = 0.5*SystemsController->GetRawAxis(5);
+    double right_y = -0.5*SystemsController->GetRawAxis(5);
 
     if(fabs(right_y) < 0.1){
         right_y = 0;
@@ -135,12 +135,12 @@ void Elevator::motionMagic(double rotations){
 
 void Elevator::elevatorUp()
 {
-    elevatorMotor->Set(ControlMode::PercentOutput, .1);
+    elevatorMotor->Set(ControlMode::PercentOutput, .2);
 }
 
 void Elevator::elevatorDown()
 {
-    elevatorMotor->Set(ControlMode::PercentOutput, -.1);
+    elevatorMotor->Set(ControlMode::PercentOutput, -.4);
 }
 
 double Elevator::getPosition(){

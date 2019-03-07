@@ -27,6 +27,8 @@ void ElevatorDown::Initialize() {
 
     std::cout << "elevator down!" << std::endl;
 
+    SetTimeout(4.0);
+
 }
 
 // Called repeatedly when this Command is scheduled to run

@@ -85,7 +85,7 @@ OI::OI() {
 //when using toggle when pressed, you need to remove
 // the first when pressed in the auto generated code,
 // and you need to remove the smart dashboard init too
-
+/*
     y->ToggleWhenPressed(new ElevatorUp(Robot::elevator->HPOS1));
     y->ToggleWhenPressed(new ElevatorUp(Robot::elevator->CPOS1));
     y->ToggleWhenPressed(new ElevatorUp(Robot::elevator->HPOS2));
@@ -98,6 +98,7 @@ OI::OI() {
     b->ToggleWhenPressed(new ArmUp(Robot::arm->POS2));
     b->ToggleWhenPressed(new ArmUp(Robot::arm->POS3));
     b->ToggleWhenPressed(new ArmDown());
+    */
 
 }
 

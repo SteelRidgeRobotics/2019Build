@@ -26,6 +26,7 @@ ArmDown::ArmDown(): frc::Command() {
 // Called just before this Command runs the first time
 void ArmDown::Initialize() {
     std::cout << "Moving Arm Down!" << std::endl;
+    SetTimeout(4.0);
 }
 
 // Called repeatedly when this Command is scheduled to run
