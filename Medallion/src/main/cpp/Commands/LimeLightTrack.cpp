@@ -38,7 +38,7 @@ void LimeLightTrack::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void LimeLightTrack::Execute() {
     double heading_error = Robot::limelight->getTx();
-    double distance_error = TARGET_DISTANCE - Robot::limelight->getDistance(); //TARGET_DISTANCE needs to be tested and changed in LimelightTrack.h
+    double distance_error = Robot::limelight->getDistance() - TARGET_DISTANCE; //TARGET_DISTANCE needs to be tested and changed in LimelightTrack.h
     double steering_adjust = 0.0;
     double distance_adjust = 0.0;
     double left_command = 0.0;
