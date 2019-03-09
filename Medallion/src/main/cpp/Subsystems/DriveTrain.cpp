@@ -72,10 +72,10 @@ void DriveTrain::userDrive(std::shared_ptr<frc::Joystick>DriveController)
     std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
     static constexpr double TARGET_AREA = 3;
     */
-    double left_y = -1*DriveController->GetRawAxis(1);
-    double right_y = -1*DriveController->GetRawAxis(5);
+    double left_y = -0.7*DriveController->GetRawAxis(1);
+    double right_y = -0.7*DriveController->GetRawAxis(5);
     int l_bump = DriveController->GetRawButton(5);
-    int r_bump = DriveController->GetRawButton(6);
+    //int r_bump = DriveController->GetRawButton(6);
 
     
 
@@ -88,8 +88,8 @@ void DriveTrain::userDrive(std::shared_ptr<frc::Joystick>DriveController)
     }
 
     if (l_bump == 1) {
-        left_y = 0.6*left_y;
-        right_y = 0.6*right_y;
+        left_y = 0.5*left_y;
+        right_y = 0.5*right_y;
 
     }
 

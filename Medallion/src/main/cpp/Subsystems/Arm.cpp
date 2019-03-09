@@ -35,18 +35,19 @@ Arm::Arm() : frc::Subsystem("Arm") {
     armMotor->ConfigPeakOutputForward(1, kTimeoutMS);
     armMotor->ConfigPeakOutputReverse(-1, kTimeoutMS);
     armMotor->SelectProfileSlot(0, 0);
-    armMotor->Config_kF(0, 0, kTimeoutMS);//these guys need to be set too!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    armMotor->Config_kP(0, 0, kTimeoutMS);    //!
+    armMotor->Config_kF(0, kF, kTimeoutMS);//these guys need to be set too!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    armMotor->Config_kP(0, kP, kTimeoutMS);    //!
     armMotor->Config_kI(0, 0, kTimeoutMS);    //!!
     armMotor->Config_kD(0, 0, kTimeoutMS);    //!!! 
-    armMotor->ConfigMotionCruiseVelocity(0, kTimeoutMS); //!!!!
-    armMotor->ConfigMotionAcceleration(0, kTimeoutMS); //!!!!!
+    armMotor->ConfigMotionCruiseVelocity(350, kTimeoutMS); //!!!!
+    armMotor->ConfigMotionAcceleration(350, kTimeoutMS); //!!!!!
     armMotor->SetSelectedSensorPosition(0, 0, kTimeoutMS); //look into the first value (initial sensor position)
-    armMotor->ConfigForwardSoftLimitThreshold(5430, kTimeoutMS);
+    armMotor->ConfigForwardSoftLimitThreshold(5685, kTimeoutMS);
     //armMotor->ConfigReverseSoftLimitThreshold(-10000, kTimeoutMS);
     armMotor->ConfigClearPositionOnLimitR(true, kTimeoutMS);
     armMotor->ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeoutMS);
     armMotor->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeoutMS);
+    armMotor->ConfigMotionSCurveStrength(3, kTimeoutMS);
 }
 
 void Arm::InitDefaultCommand() {
@@ -75,11 +76,11 @@ void Arm::Periodic() {
 void Arm::userArm(std::shared_ptr<frc::Joystick>SystemsController)
 {
 
-    int ArmJoyNum = 1; 
+    int ArmJoyNum = 5; 
 
     double left_y = -0.5*SystemsController->GetRawAxis(ArmJoyNum);
 
-    if(fabs(left_y) < 0.1)
+    if(fabs(left_y) < 0.05)
     {
         left_y = 0;
     }
@@ -144,4 +145,8 @@ double Arm::getPosition(){
 
     return position;
 
+}
+
+bool Arm::getLimitR(){
+    return armMotor->GetSensorCollection().IsRevLimitSwitchClosed();
 }

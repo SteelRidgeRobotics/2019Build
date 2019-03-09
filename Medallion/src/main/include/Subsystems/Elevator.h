@@ -42,25 +42,25 @@ public:
 
 	static constexpr double HPOS1 = 3;
 
-	static constexpr double HPOS2 = 46.3 - 20.75;
+	static constexpr double HPOS2 = 26.5;
 
-	static constexpr double HPOS3 = 50.0; //all these need to be set!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	static constexpr double HPOS3 = 50.0-20.75; //all these need to be set!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-	static constexpr double CPOS1 = 26.8 - 20.75;
+	static constexpr double CPOS1 = 26.8-20.75;
 
-	static constexpr double CPOS2 = 54.8 - 20.75;
+	static constexpr double CPOS2 = 54.8-20.75;
 
-	static constexpr double CPOS3 = 50.0;
+	static constexpr double CPOS3 = 55.0-20.75;
 
 	static constexpr double MAX = 55.0;
 
-	static const int kGearRatio = 25;
+	static constexpr double kGearRatio = 25.0;
 
-	static const int kSensorUnitsPerRotation = 80;
+	static constexpr double kSensorUnitsPerRotation = 80.0;
 
 	static constexpr double kF = 1023.0/701.0;
 
-	static constexpr double kP = 0.0;
+	static constexpr double kP = 1.0;
 
 	static constexpr double kIzone = 0.0;
 
@@ -68,7 +68,11 @@ public:
 
 	static constexpr double kD = 0.0;
 
+	static constexpr double PI = 3.14159265358979323846;
+
 	static const int kTimeoutMS = 30;
+
+	static constexpr double fudge = 1.54;
 
 	void userElevate(std::shared_ptr<frc::Joystick>SystemsController);
 
@@ -90,7 +94,12 @@ public:
 	
 	void elevatorDown();
 
-	double getPosition();
+	double getPositionInches();
+
+	double getPositionRaw();
+
+	bool getLimitR();
+
 };
 
 #endif

@@ -41,23 +41,31 @@ public:
 	
 	void userArm(std::shared_ptr<frc::Joystick>SystemsController);
 
-	static constexpr double POS1 = 0.0;
+	static constexpr double POS1 = 2050.0;
 
-	static constexpr double POS2 = 0.0;
+	static constexpr double POS2 = 4500.0;
 
-	static constexpr double POS3 = 0.0 ;
+	static constexpr double POS3 = 5680.0 ;
 
 	static constexpr double MIN = 0.0; 
 
-	static constexpr double MID = 11;
+	static constexpr double MAX = 5685; //these three are in inches, and MIN needs to be set to 0
 
-	static constexpr double MAX = 30; //these three are in inches, and MIN needs to be set to 0
+	static constexpr double kF = 1023.0/701.0;
+
+	static constexpr double kP = 0.3;
+
+	static constexpr double kIzone = 0.0;
+
+	static constexpr double kI = 0.0;
+
+	static constexpr double kD = 0.0;
 
 	static const int kTimeoutMS = 30;
 
-	static constexpr double kGearRatio = 0.0;
+	static constexpr double kGearRatio = 25.0;
 
-	static constexpr double kSensorUnitsPerRotation = 0.0;
+	static constexpr double kSensorUnitsPerRotation = 80.0;
 
 	void encoderReset();
 
@@ -72,6 +80,8 @@ public:
 	void armDown();
 
 	double getPosition();
+
+	bool getLimitR();
 	
 };
 

@@ -28,7 +28,7 @@ Elevator::Elevator() : frc::Subsystem("Elevator") {
      height_Pos = 0.0;
      elevatorMotor->ConfigSelectedFeedbackSensor(FeedbackDevice::QuadEncoder, 0, kTimeoutMS);
      elevatorMotor->SetSensorPhase(true); //NEEDS TO BE LOOKED INTO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     elevatorMotor->SetInverted(false); // !!!!!!!
+     elevatorMotor->SetInverted(true); // !!!!!!!
      elevatorMotor->SetStatusFramePeriod(StatusFrameEnhanced::Status_13_Base_PIDF0, 10, kTimeoutMS);
      elevatorMotor->SetStatusFramePeriod(StatusFrameEnhanced::Status_10_MotionMagic, 10, kTimeoutMS);
      elevatorMotor->ConfigNominalOutputForward(0, kTimeoutMS);
@@ -37,17 +37,19 @@ Elevator::Elevator() : frc::Subsystem("Elevator") {
      elevatorMotor->ConfigPeakOutputReverse(-1, kTimeoutMS);
      elevatorMotor->SelectProfileSlot(0, 0);
      elevatorMotor->Config_kF(0, kF, kTimeoutMS);//these guys need to be set too!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     elevatorMotor->Config_kP(0, 0, kTimeoutMS);    //!
+     elevatorMotor->Config_kP(0, kP, kTimeoutMS);    //!
      elevatorMotor->Config_kI(0, 0, kTimeoutMS);    //!!
      elevatorMotor->Config_kD(0, 0, kTimeoutMS);    //!!! 
      elevatorMotor->ConfigMotionCruiseVelocity(350, kTimeoutMS); //!!!!
      elevatorMotor->ConfigMotionAcceleration(350, kTimeoutMS); //!!!!!
      elevatorMotor->SetSelectedSensorPosition(0, 0, kTimeoutMS); //look into the first value (initial sensor position)
-     elevatorMotor->ConfigForwardSoftLimitThreshold(26200, kTimeoutMS);
-     //elevatorMotor->ConfigReverseSoftLimitThreshold(-10, kTimeoutMS);
+     //elevatorMotor->ConfigForwardSoftLimitThreshold(26200, kTimeoutMS);
+     //elevatorMotor->ConfigReverseSoftLimitThreshold(10, kTimeoutMS);
      elevatorMotor->ConfigClearPositionOnLimitR(true, kTimeoutMS);
-     elevatorMotor->ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeoutMS);
+     elevatorMotor->ConfigClearPositionOnLimitF(false, kTimeoutMS);
      elevatorMotor->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeoutMS);
+     elevatorMotor->ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeoutMS);
+     elevatorMotor->ConfigMotionSCurveStrength(3, kTimeoutMS);
 
 }
 
@@ -75,7 +77,7 @@ void Elevator::Periodic() {
 // here. Call these from Commands.
 
 void Elevator::userElevate(std::shared_ptr<frc::Joystick>SystemsController){
-    double right_y = -0.5*SystemsController->GetRawAxis(5);
+    double right_y = -0.75*SystemsController->GetRawAxis(1);
 
     if(fabs(right_y) < 0.1){
         right_y = 0;
@@ -102,12 +104,12 @@ void Elevator::encoderDone()
 
 double Elevator::inchesToRotations(double inches)
 {
-    return inches*kGearRatio*kSensorUnitsPerRotation*(1/M_PI);
+    return inches*fudge*kGearRatio*kSensorUnitsPerRotation*(1/PI);
 }
 
 double Elevator::rotationsToInches(double rotations)
 {
-    return rotations*M_PI*(1/kGearRatio)*(1/kSensorUnitsPerRotation); //... we need to figure out how to convert rotations into inches to do this conversion
+    return rotations*PI*(1/kGearRatio)*(1/kSensorUnitsPerRotation)*(1/fudge); //... we need to figure out how to convert rotations into inches to do this conversion
 }
 
 double Elevator::findDistance(double inches)
@@ -140,13 +142,25 @@ void Elevator::elevatorUp()
 
 void Elevator::elevatorDown()
 {
-    elevatorMotor->Set(ControlMode::PercentOutput, -.4);
+    elevatorMotor->Set(ControlMode::PercentOutput, -.6);
 }
 
-double Elevator::getPosition(){
+double Elevator::getPositionInches(){
     double position = elevatorMotor->GetSelectedSensorPosition();
 
-    //return rotationsToInches(position);
+    return rotationsToInches(position);
+    
+
+}
+
+double Elevator::getPositionRaw(){
+    double position = elevatorMotor->GetSelectedSensorPosition();
+
     return position;
 
+}
+
+bool Elevator::getLimitR(){
+    return elevatorMotor->GetSensorCollection().IsRevLimitSwitchClosed();
+    
 }

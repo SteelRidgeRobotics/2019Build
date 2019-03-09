@@ -63,8 +63,9 @@ void Robot::RobotInit() {
 	frc::SmartDashboard::PutData("Auto Modes", &chooser);
 
 	camera0 = frc::CameraServer::GetInstance()->StartAutomaticCapture(0);
-	camera0.SetResolution(480,480);
-	camera0.SetFPS(20);
+	camera0.SetResolution(250,250);
+		camera0.SetFPS(30);
+
 	//camera1 = frc::CameraServer::GetInstance()->StartAutomaticCapture(1);
 	//camera1.SetResolution(480,480);
 	//camera1.SetFPS(20);
@@ -111,7 +112,9 @@ void Robot::TeleopInit() {
 void Robot::TeleopPeriodic() {
 	frc::Scheduler::GetInstance()->Run();
 
-	frc::SmartDashboard::PutNumber("Ele_Pos", Robot::elevator->getPosition());
+	frc::SmartDashboard::PutNumber("Ele_Pos_Raw", Robot::elevator->getPositionRaw());
+
+	frc::SmartDashboard::PutNumber("Ele_Pos_Inches", Robot::elevator->getPositionInches());
 
 	frc::SmartDashboard::PutNumber("Arm_Pos", Robot::arm->getPosition());
 

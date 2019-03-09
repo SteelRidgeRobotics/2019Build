@@ -43,23 +43,17 @@ void LimeLightTrack::Execute() {
     double distance_adjust = 0.0;
     double left_command = 0.0;
     double right_command = 0.0;
-    double kPDistance = -0.01;
-    double kPTurn = 0.01;
+    double kPDistance = 0.1;
+    double kPTurn = 0.1;
     
 
 if(Robot::limelight->getTv())
     {
        steering_adjust = kPTurn * heading_error;
 
-       if(Robot::limelight->getDistance() >= 40)
-       {
+       
             distance_adjust = kPDistance * distance_error;
-       }
-
-       else
-       {
-           distance_adjust = 0;
-       }
+     
     }
 
 else{
