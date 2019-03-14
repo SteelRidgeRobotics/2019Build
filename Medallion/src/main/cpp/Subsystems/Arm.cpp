@@ -150,3 +150,9 @@ double Arm::getPosition(){
 bool Arm::getLimitR(){
     return armMotor->GetSensorCollection().IsRevLimitSwitchClosed();
 }
+
+int Arm::distanceError(){
+
+    return armMotor->GetClosedLoopError();
+
+}

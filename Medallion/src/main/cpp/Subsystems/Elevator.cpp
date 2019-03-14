@@ -164,3 +164,9 @@ bool Elevator::getLimitR(){
     return elevatorMotor->GetSensorCollection().IsRevLimitSwitchClosed();
     
 }
+
+int Elevator::distanceError(){
+
+    return elevatorMotor->GetClosedLoopError();
+
+}

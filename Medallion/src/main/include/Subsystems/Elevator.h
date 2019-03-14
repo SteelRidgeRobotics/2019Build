@@ -100,6 +100,8 @@ public:
 
 	bool getLimitR();
 
+	int distanceError();
+
 };
 
 #endif

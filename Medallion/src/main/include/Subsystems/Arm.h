@@ -82,6 +82,8 @@ public:
 	double getPosition();
 
 	bool getLimitR();
+
+	int distanceError();
 	
 };
 

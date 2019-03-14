@@ -42,6 +42,7 @@ bool DriveWithJoystick::IsFinished() {
 // Called once after isFinished returns true
 void DriveWithJoystick::End() {
 
+Robot::driveTrain->setMotors(0.0, 0.0);
 
 Cancel();
 

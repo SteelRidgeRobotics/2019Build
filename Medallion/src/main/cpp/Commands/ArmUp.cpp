@@ -37,7 +37,18 @@ Robot::arm->motionMagic(distance);
 
 // Make this return true when this Command no longer needs to run execute()
 bool ArmUp::IsFinished() {
+
+if(Robot::arm->distanceError() < 300)
+{
+    return true;
+}
+
+else
+{
     return false;
+}
+
+
 }
 
 // Called once after isFinished returns true

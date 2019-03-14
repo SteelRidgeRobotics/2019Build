@@ -76,10 +76,17 @@ bool LimeLightTrack::IsFinished() {
 // Called once after isFinished returns true
 void LimeLightTrack::End() {
 
+    Robot::driveTrain->setMotors(0.0, 0.0);
+
+    Cancel();
+
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void LimeLightTrack::Interrupted() {
+
+    Cancel();
+    End();
 
 }
