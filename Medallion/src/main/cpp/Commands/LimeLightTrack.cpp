@@ -32,39 +32,40 @@ void LimeLightTrack::Initialize() {
     Robot::limelight->setCameraMode(0);
     Robot::limelight->setLedMode(3);
     Robot::limelight->setPipeline(1);
+
+    Robot::driveTrain->setCoast();
  
 }
 
 // Called repeatedly when this Command is scheduled to run
 void LimeLightTrack::Execute() {
     double heading_error = Robot::limelight->getTx();
-    double distance_error = Robot::limelight->getDistance() - TARGET_DISTANCE; //TARGET_DISTANCE needs to be tested and changed in LimelightTrack.h
-    double steering_adjust = 0.0;
-    double distance_adjust = 0.0;
-    double left_command = 0.0;
-    double right_command = 0.0;
-    double kPDistance = 0.1;
-    double kPTurn = 0.1;
+    double distance_error = 15.0 - Robot::limelight->getTa(); //TARGET_DISTANCE needs to be tested and changed in LimelightTrack.h
+    double steering_adjust;
+    double distance_adjust;
+    double left_command;
+    double right_command;
+    double kPDistance = -1.0;
+    double kPTurn = 1.0;
     
 
-if(Robot::limelight->getTv())
+if(!Robot::limelight->getTv())
     {
-       steering_adjust = kPTurn * heading_error;
-
-       
-            distance_adjust = kPDistance * distance_error;
-     
+        steering_adjust = 0.3;
+        distance_adjust = 0.0;
+           
     }
 
 else{
-    steering_adjust = 0.3;
-    distance_adjust = 0.0;
-    }
 
-left_command+=steering_adjust + distance_adjust;
-right_command-=steering_adjust = distance_adjust;
+steering_adjust = heading_error * kPTurn;
+distance_adjust = distance_error * kPDistance;
 
-Robot::driveTrain->setMotors(left_command, right_command);
+left_command +=steering_adjust + distance_adjust;
+right_command -=steering_adjust + distance_adjust;
+
+Robot::driveTrain->setMotors(-left_command, right_command);
+}
 
 }
 
@@ -78,7 +79,9 @@ void LimeLightTrack::End() {
 
     Robot::driveTrain->setMotors(0.0, 0.0);
 
-    Cancel();
+    //Cancel();
+
+    Robot::driveTrain->setBrake();
 
 }
 
@@ -86,7 +89,7 @@ void LimeLightTrack::End() {
 // subsystems is scheduled to run
 void LimeLightTrack::Interrupted() {
 
-    Cancel();
+    //Cancel();
     End();
 
 }
