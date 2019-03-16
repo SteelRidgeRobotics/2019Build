@@ -33,39 +33,38 @@ void LimeLightTrack::Initialize() {
     Robot::limelight->setLedMode(3);
     Robot::limelight->setPipeline(1);
 
-    Robot::driveTrain->setCoast();
+    Robot::driveTrain->setInvert(false);
  
 }
 
 // Called repeatedly when this Command is scheduled to run
 void LimeLightTrack::Execute() {
-    double heading_error = Robot::limelight->getTx();
-    double distance_error = 15.0 - Robot::limelight->getTa(); //TARGET_DISTANCE needs to be tested and changed in LimelightTrack.h
+
     double steering_adjust;
     double distance_adjust;
-    double left_command;
-    double right_command;
-    double kPDistance = -1.0;
-    double kPTurn = 1.0;
+    double kPDistance = 0.05;
+    double kPTurn = 0.4;
     
 
-if(!Robot::limelight->getTv())
+if(Robot::limelight->getTv())
     {
-        steering_adjust = 0.3;
-        distance_adjust = 0.0;
-           
+    double tx = Robot::limelight->getTx();
+    double ty = Robot::limelight->getTy();
+    double heading_error = tx;
+    double distance_error = 20.0 - ty;
+    
+    steering_adjust = heading_error * kPTurn;
+    distance_adjust = distance_error * kPDistance;
+        
     }
 
 else{
-
-steering_adjust = heading_error * kPTurn;
-distance_adjust = distance_error * kPDistance;
-
-left_command +=steering_adjust + distance_adjust;
-right_command -=steering_adjust + distance_adjust;
-
-Robot::driveTrain->setMotors(-left_command, right_command);
+    steering_adjust = 0.0;
+    distance_adjust = 0.0;
 }
+
+
+Robot::driveTrain->limelightAuto(distance_adjust, steering_adjust);
 
 }
 
@@ -77,11 +76,9 @@ bool LimeLightTrack::IsFinished() {
 // Called once after isFinished returns true
 void LimeLightTrack::End() {
 
-    Robot::driveTrain->setMotors(0.0, 0.0);
+    Robot::driveTrain->setMotors(0.0,0.0);
 
-    //Cancel();
-
-    Robot::driveTrain->setBrake();
+    Robot::driveTrain->setInvert(true);
 
 }
 
@@ -89,7 +86,7 @@ void LimeLightTrack::End() {
 // subsystems is scheduled to run
 void LimeLightTrack::Interrupted() {
 
-    //Cancel();
+   
     End();
 
 }

@@ -118,7 +118,9 @@ void Robot::TeleopPeriodic() {
 
 	frc::SmartDashboard::PutNumber("Arm_Pos", Robot::arm->getPosition());
 
-	frc::SmartDashboard::PutNumber("Limelight_Distance", Robot::limelight->getDistance());
+	//frc::SmartDashboard::PutNumber("Limelight_Distance", Robot::limelight->getDistance());
+
+	//frc::SmartDashboard::PutNumber("Ta", Robot::limelight->getTa());
 
 }
 

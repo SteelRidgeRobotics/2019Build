@@ -109,7 +109,7 @@ double Elevator::inchesToRotations(double inches)
 
 double Elevator::rotationsToInches(double rotations)
 {
-    return rotations*PI*(1/kGearRatio)*(1/kSensorUnitsPerRotation)*(1/fudge); //... we need to figure out how to convert rotations into inches to do this conversion
+    return rotations*PI*(1/kGearRatio)*(1/kSensorUnitsPerRotation); //... we need to figure out how to convert rotations into inches to do this conversion
 }
 
 double Elevator::findDistance(double inches)
