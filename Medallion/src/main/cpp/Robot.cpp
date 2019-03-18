@@ -64,12 +64,8 @@ void Robot::RobotInit() {
 
 	camera0 = frc::CameraServer::GetInstance()->StartAutomaticCapture(0);
 	camera0.SetResolution(250,250);
-		camera0.SetFPS(30);
+	camera0.SetFPS(30);
 
-	//camera1 = frc::CameraServer::GetInstance()->StartAutomaticCapture(1);
-	//camera1.SetResolution(480,480);
-	//camera1.SetFPS(20);
-	
 	
 }
 
@@ -118,9 +114,11 @@ void Robot::TeleopPeriodic() {
 
 	frc::SmartDashboard::PutNumber("Arm_Pos", Robot::arm->getPosition());
 
-	//frc::SmartDashboard::PutNumber("Limelight_Distance", Robot::limelight->getDistance());
+	frc::SmartDashboard::PutNumber("Ty", Robot::limelight->getTy());
 
-	//frc::SmartDashboard::PutNumber("Ta", Robot::limelight->getTa());
+	frc::SmartDashboard::PutNumber("Ta", Robot::limelight->getTa());
+
+	frc::SmartDashboard::PutNumber("Ts", Robot::limelight->getTs());
 
 }
 

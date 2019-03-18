@@ -33,17 +33,18 @@ void LimeLightTrack::Initialize() {
     Robot::limelight->setLedMode(3);
     Robot::limelight->setPipeline(1);
 
-    Robot::driveTrain->setInvert(false);
+    Robot::driveTrain->initMotors();
+    Robot::driveTrain->setInvert(false, false);
  
 }
 
 // Called repeatedly when this Command is scheduled to run
 void LimeLightTrack::Execute() {
 
-    double steering_adjust;
-    double distance_adjust;
-    double kPDistance = 0.05;
-    double kPTurn = 0.4;
+    double steering_adjust = 0.0;
+    double distance_adjust = 0.0;
+    double kPDistance = 0.06;
+    double kPTurn = 0.05;
     
 
 if(Robot::limelight->getTv())
@@ -59,10 +60,9 @@ if(Robot::limelight->getTv())
     }
 
 else{
-    steering_adjust = 0.0;
+    steering_adjust = 0.85;
     distance_adjust = 0.0;
-}
-
+    }
 
 Robot::driveTrain->limelightAuto(distance_adjust, steering_adjust);
 
@@ -75,18 +75,15 @@ bool LimeLightTrack::IsFinished() {
 
 // Called once after isFinished returns true
 void LimeLightTrack::End() {
-
-    Robot::driveTrain->setMotors(0.0,0.0);
-
-    Robot::driveTrain->setInvert(true);
-
+    Cancel();
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void LimeLightTrack::Interrupted() {
-
-   
-    End();
-
+    
+    Robot::driveTrain->stopMotors();
+    Robot::driveTrain->setInvert(false, true);
+    Robot::driveTrain->initMotors();
+    
 }

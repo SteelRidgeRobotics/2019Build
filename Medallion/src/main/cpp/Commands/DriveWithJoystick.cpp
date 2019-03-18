@@ -25,6 +25,8 @@ DriveWithJoystick::DriveWithJoystick(): frc::Command() {
 
 // Called just before this Command runs the first time
 void DriveWithJoystick::Initialize() {
+    Robot::driveTrain->initMotors();
+    Robot::driveTrain->setInvert(false, true);
 	
 }
 
@@ -42,15 +44,14 @@ bool DriveWithJoystick::IsFinished() {
 
 // Called once after isFinished returns true
 void DriveWithJoystick::End() {
-
-Robot::driveTrain->limelightAuto(0.0, 0.0);
-
+    Cancel();
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void DriveWithJoystick::Interrupted() {
 
-End();
-
+    Robot::driveTrain->stopMotors();
+    Robot::driveTrain->initMotors();
+   
 }

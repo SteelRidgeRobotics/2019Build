@@ -33,12 +33,15 @@ private:
 	std::shared_ptr<WPI_TalonSRX> frontRight;
 
 	//THESE NEED TO BE COMMENTED OUT WHEN USING PRACTICE ROBOT!
-	std::shared_ptr<WPI_VictorSPX> backLeft;
-	std::shared_ptr<WPI_VictorSPX> backRight;
+	//std::shared_ptr<WPI_VictorSPX> backLeft;
+	//std::shared_ptr<WPI_VictorSPX> backRight;
 	
 	//THESE NEED TO BE UNCOMMENTED WHEN USING PRACTICE ROBOT!
-	//std::shared_ptr<WPI_TalonSRX> backLeft;
-	//std::shared_ptr<WPI_TalonSRX> backRight;
+	std::shared_ptr<WPI_TalonSRX> backLeft;
+	std::shared_ptr<WPI_TalonSRX> backRight;
+
+	std::shared_ptr<frc::SpeedControllerGroup> leftside;
+	std::shared_ptr<frc::SpeedControllerGroup> rightside;
 
 	std::shared_ptr<frc::DifferentialDrive> limelightdrive;
 
@@ -56,11 +59,13 @@ public:
 
 	void userDrive(std::shared_ptr<frc::Joystick>DriveController);
 
-	void setMotors(double leftspeed, double rightspeed);
-
 	void limelightAuto(double move, double turn);
 
-	void setInvert(bool value);
+	void setInvert(bool left_bool, bool right_bool);
+
+	void stopMotors();
+
+	void initMotors();
 	
 };
 
