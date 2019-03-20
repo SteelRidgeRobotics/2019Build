@@ -63,6 +63,9 @@ OI::OI() {
     
     dRBump.reset(new frc::JoystickButton(driveController.get(), 6));
     dRBump->WhileHeld(new LimeLightTrack());
+    
+    //dRBump->WhenPressed(new LimeLightTrack());
+    //dRBump->WhenReleased(new LimelightOff());
 
     // SmartDashboard Buttons
     //frc::SmartDashboard::PutData("HabSkiBack", new HabSkiBack());

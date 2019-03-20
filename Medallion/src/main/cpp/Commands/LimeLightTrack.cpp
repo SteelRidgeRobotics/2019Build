@@ -32,39 +32,39 @@ void LimeLightTrack::Initialize() {
     Robot::limelight->setCameraMode(0);
     Robot::limelight->setLedMode(3);
     Robot::limelight->setPipeline(1);
+
+    Robot::driveTrain->initMotors();
+    Robot::driveTrain->setInvert(false, false);
  
 }
 
 // Called repeatedly when this Command is scheduled to run
 void LimeLightTrack::Execute() {
-    double heading_error = Robot::limelight->getTx();
-    double distance_error = Robot::limelight->getDistance() - TARGET_DISTANCE; //TARGET_DISTANCE needs to be tested and changed in LimelightTrack.h
+
     double steering_adjust = 0.0;
     double distance_adjust = 0.0;
-    double left_command = 0.0;
-    double right_command = 0.0;
-    double kPDistance = 0.1;
-    double kPTurn = 0.1;
+    double kPDistance = 0.06;
+    double kPTurn = 0.05;
     
 
 if(Robot::limelight->getTv())
     {
-       steering_adjust = kPTurn * heading_error;
-
-       
-            distance_adjust = kPDistance * distance_error;
-     
+    double tx = Robot::limelight->getTx();
+    double ty = Robot::limelight->getTy();
+    double heading_error = tx;
+    double distance_error = 20.0 - ty;
+    
+    steering_adjust = heading_error * kPTurn;
+    distance_adjust = distance_error * kPDistance;
+        
     }
 
 else{
-    steering_adjust = 0.3;
+    steering_adjust = 0.85;
     distance_adjust = 0.0;
     }
 
-left_command+=steering_adjust + distance_adjust;
-right_command-=steering_adjust = distance_adjust;
-
-Robot::driveTrain->setMotors(left_command, right_command);
+Robot::driveTrain->limelightAuto(distance_adjust, steering_adjust);
 
 }
 
@@ -75,18 +75,15 @@ bool LimeLightTrack::IsFinished() {
 
 // Called once after isFinished returns true
 void LimeLightTrack::End() {
-
-    Robot::driveTrain->setMotors(0.0, 0.0);
-
     Cancel();
-
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void LimeLightTrack::Interrupted() {
-
-    Cancel();
-    End();
-
+    
+    Robot::driveTrain->stopMotors();
+    Robot::driveTrain->setInvert(false, true);
+    Robot::driveTrain->initMotors();
+    
 }
