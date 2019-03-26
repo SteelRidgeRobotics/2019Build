@@ -42,3 +42,12 @@ void Wrist::Periodic() {
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
+void Wrist::wristDown()
+{
+    wristSolenoid->Set(frc::DoubleSolenoid::kForward);
+}
+
+void Wrist::wristUp()
+{
+    wristSolenoid->Set(frc::DoubleSolenoid::kReverse);
+}

@@ -42,3 +42,12 @@ void Puncher::Periodic() {
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
+void Puncher::puncherOut()
+{
+    puncherSolenoid->Set(frc::DoubleSolenoid::kForward);
+}
+
+void Puncher::puncherIn()
+{
+    puncherSolenoid->Set(frc::DoubleSolenoid::kReverse);
+}

@@ -42,3 +42,12 @@ void Claw::Periodic() {
 // Put methods for controlling this subsystem
 // here. Call these from Commands.
 
+void Claw::openClaw()
+{
+    clawSolenoid->Set(frc::DoubleSolenoid::kForward);
+}
+
+void Claw::closeClaw()
+{
+    clawSolenoid->Set(frc::DoubleSolenoid::kReverse);
+}
