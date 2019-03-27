@@ -25,7 +25,7 @@ PuncherControl::PuncherControl(): frc::Command() {
 // Called just before this Command runs the first time
 void PuncherControl::Initialize() {
 
-    SetTimeout(1.0);
+    SetTimeout(1.5);
     std::cout << "Puncher!" << std::endl;
     Robot::puncher->puncherIn();
 }
