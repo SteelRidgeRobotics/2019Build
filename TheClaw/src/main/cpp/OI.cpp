@@ -34,8 +34,7 @@
 #include "Commands/LowHatch.h"
 #include "Commands/MedHatch.h"
 #include "Commands/MidCargo.h"
-#include "Commands/PuncherIn.h"
-#include "Commands/PuncherOutTimed.h"
+#include "Commands/PuncherControl.h"
 #include "Commands/WristMove.h"
 #include "Commands/WristStart.h"
 
