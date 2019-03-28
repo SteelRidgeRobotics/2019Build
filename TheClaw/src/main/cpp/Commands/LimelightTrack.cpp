@@ -47,7 +47,7 @@ void LimelightTrack::Execute() {
 
     double steering_adjust = 0.0;
     double distance_adjust = 0.0;
-    double kPDistance = 0.06;
+    double kPDistance = 0.045;
     double kPTurn = 0.05;
     
 
@@ -64,7 +64,7 @@ if(Robot::limelight->getTv())
     }
 
 else{
-    steering_adjust = 0.85;
+    steering_adjust = 0.0;
     distance_adjust = 0.0;
     }
 

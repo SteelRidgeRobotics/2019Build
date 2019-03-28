@@ -74,7 +74,7 @@ void Elevator::Periodic() {
 // here. Call these from Commands.
 
 void Elevator::userElevate(std::shared_ptr<frc::Joystick>SystemsController){
-    double right_y = -0.75*SystemsController->GetRawAxis(1);
+    double right_y = -1.0*SystemsController->GetRawAxis(1);
 
     if(fabs(right_y) < 0.1){
         right_y = 0;

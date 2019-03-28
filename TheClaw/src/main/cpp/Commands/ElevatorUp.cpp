@@ -41,8 +41,8 @@ void ElevatorUp::Execute() {
 
 // Make this return true when this Command no longer needs to run execute()
 bool ElevatorUp::IsFinished() {
-
-    if(Robot::elevator->distanceError() < 650)
+/*
+    if(Robot::elevator->distanceError() <= 10)
     {
         return true;
     }
@@ -51,16 +51,18 @@ bool ElevatorUp::IsFinished() {
     {
         return false;
     }
+*/
+return IsTimedOut();
  
 }
 
 // Called once after isFinished returns true
 void ElevatorUp::End() {
-
+    Robot::elevator->userElevate(Robot::oi->getSystemsController());
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void ElevatorUp::Interrupted() {
-
+    End();
 }

@@ -43,15 +43,15 @@ public:
 
 	static constexpr double HPOS1 = 0;
 
-	static constexpr double HPOS2 = 0;
+	static constexpr double HPOS2 = 17000.0;
 
-	static constexpr double HPOS3 = 0; //all these need to be set!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	static constexpr double HPOS3 = 26950.0; //all these need to be set!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	static constexpr double CPOS1 = 0;
 
-	static constexpr double CPOS2 = 0;
+	static constexpr double CPOS2 = 16000.0;
 
-	static constexpr double CPOS3 = 0;
+	static constexpr double CPOS3 = 26950.0;
 
 	static constexpr double MAX = 0;
 

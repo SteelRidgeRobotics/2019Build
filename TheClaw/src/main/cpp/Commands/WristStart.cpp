@@ -35,7 +35,7 @@ void WristStart::Initialize() {
 // Called repeatedly when this Command is scheduled to run
 void WristStart::Execute() {
 
-    Robot::wrist->wristUp();
+    Robot::wrist->wristDown();
 
     
 

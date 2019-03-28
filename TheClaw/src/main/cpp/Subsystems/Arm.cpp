@@ -47,6 +47,8 @@ Arm::Arm() : frc::Subsystem("Arm") {
     armMotor->ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeoutMS);
     armMotor->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeoutMS);
     armMotor->ConfigMotionSCurveStrength(3, kTimeoutMS);
+    armMotor->ConfigPeakCurrentLimit(20, kTimeoutMS);
+    armMotor->EnableCurrentLimit(true);
 }
 
 void Arm::InitDefaultCommand() {
