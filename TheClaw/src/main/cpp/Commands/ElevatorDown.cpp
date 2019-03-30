@@ -59,11 +59,13 @@ bool ElevatorDown::IsFinished() {
 
 // Called once after isFinished returns true
 void ElevatorDown::End() {
+    Robot::elevator->userElevate(Robot::oi->getSystemsController());
 
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
 void ElevatorDown::Interrupted() {
+    End();
 
 }

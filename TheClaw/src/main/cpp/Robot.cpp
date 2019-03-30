@@ -101,15 +101,15 @@ void Robot::TeleopPeriodic() {
 
 	frc::SmartDashboard::PutNumber("Ele_Pos_Raw", Robot::elevator->getPositionRaw());
 
-	frc::SmartDashboard::PutNumber("Ele_Pos_Inches", Robot::elevator->getPositionInches());
+	frc::SmartDashboard::PutNumber("Ele_Target", Robot::elevator->distanceTarget());
 
 	frc::SmartDashboard::PutNumber("Arm_Pos", Robot::arm->getPosition());
 
 	frc::SmartDashboard::PutNumber("Ty", Robot::limelight->getTy());
 
-	frc::SmartDashboard::PutNumber("Ta", Robot::limelight->getTa());
+	//frc::SmartDashboard::PutNumber("Ta", Robot::limelight->getTa());
 
-	frc::SmartDashboard::PutNumber("Ts", Robot::limelight->getTs());
+	//frc::SmartDashboard::PutNumber("Ts", Robot::limelight->getTs());
 
 	
 

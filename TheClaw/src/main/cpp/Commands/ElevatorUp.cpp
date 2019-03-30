@@ -34,25 +34,17 @@ void ElevatorUp::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ElevatorUp::Execute() {
-    double distance = Robot::elevator->findDistance(m_Inches);
-    Robot::elevator->motionMagic(distance);
+    //double distance = Robot::elevator->findDistance(m_Inches);
+    Robot::elevator->motionMagic(m_Inches);
 
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool ElevatorUp::IsFinished() {
-/*
-    if(Robot::elevator->distanceError() <= 10)
-    {
-        return true;
-    }
 
-    else
-    {
-        return false;
-    }
-*/
-return IsTimedOut();
+//Robot::elevator->isOnTarget();
+
+return Robot::elevator->isOnTarget();
  
 }
 

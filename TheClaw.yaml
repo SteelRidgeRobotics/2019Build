@@ -501,7 +501,7 @@ Children:
           name: Command
           type: Command
           validators: *id015
-          value: ClawPunch
+          value: ClawClose
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id016
           default: whileHeld
@@ -530,7 +530,7 @@ Children:
           name: Command
           type: Command
           validators: *id015
-          value: ClawClose
+          value: ClawPunch
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id016
           default: whileHeld
@@ -832,7 +832,7 @@ Children:
     Base: Command
     Name: ArmDown
   - Children: []
-    Properties: &id042
+    Properties: &id044
       Autonomous Selection: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Autonomous Selection, validators: null, value: false}
       Parameters: !!robotbuilder.data.properties.ParametersProperty
@@ -899,7 +899,7 @@ Children:
     Base: Command
     Name: WristMove
   - Children: []
-    Properties: &id041
+    Properties: &id042
       Autonomous Selection: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Autonomous Selection, validators: null, value: false}
       Parameters: !!robotbuilder.data.properties.ParametersProperty
@@ -1256,7 +1256,7 @@ Children:
           command:
             base: *id024
             name: WristStart
-            properties: &id043
+            properties: &id045
               Autonomous Selection: !!robotbuilder.data.properties.BooleanProperty {
                 default: false, name: Autonomous Selection, validators: null, value: false}
               Parameters: !!robotbuilder.data.properties.ParametersProperty
@@ -1298,7 +1298,8 @@ Children:
                 name: Parameters
                 validators: null
                 value:
-                - *id019
+                - !!robotbuilder.data.properties.ParameterDescriptor {name: timeout,
+                  type: double}
               - !!robotbuilder.data.properties.ParameterSetProperty
                 default: &id028 []
                 name: Parameter presets
@@ -1374,7 +1375,7 @@ Children:
               - !!robotbuilder.data.properties.ListProperty
                 default: &id037 []
                 name: Commands
-                validators: *id023
+                validators: [List]
                 value: *id037
               - !!robotbuilder.data.properties.ParametersProperty
                 default: []
@@ -1429,9 +1430,32 @@ Children:
         value:
         - !!robotbuilder.data.CommandGroupEntry
           command:
-            base: *id024
+            base: &id043
+              help: A command specifies an action that the robot can perform.
+              name: Command
+              properties:
+              - !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
+                name: Requires, type: Subsystem, validators: null, value: None}
+              - !!robotbuilder.data.properties.BooleanProperty {default: true, name: Button on SmartDashboard,
+                validators: null, value: true}
+              - !!robotbuilder.data.properties.ParametersProperty
+                default: []
+                name: Parameters
+                validators: null
+                value: []
+              - !!robotbuilder.data.properties.ParameterSetProperty
+                default: &id041 []
+                name: Parameter presets
+                validators: null
+                value: *id041
+              - !!robotbuilder.data.properties.BooleanProperty {default: false, name: Run When Disabled,
+                validators: null, value: false}
+              - !!robotbuilder.data.properties.BooleanProperty {default: false, name: Autonomous Selection,
+                validators: null, value: false}
+              supports: {}
+              type: Command
             name: PuncherControl
-            properties: *id041
+            properties: *id042
           hasMatch: true
           order: Parallel
           parameters:
@@ -1442,9 +1466,9 @@ Children:
           previous: null
         - !!robotbuilder.data.CommandGroupEntry
           command:
-            base: *id024
+            base: *id043
             name: ClawOpen
-            properties: *id042
+            properties: *id044
           hasMatch: true
           order: Sequential
           parameters:
@@ -1458,7 +1482,7 @@ Children:
     Base: Command Group
     Name: ClawPunch
   - Children: []
-    Properties: *id043
+    Properties: *id045
     Base: Command
     Name: WristStart
   Properties: {}

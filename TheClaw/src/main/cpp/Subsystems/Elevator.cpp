@@ -39,14 +39,15 @@ Elevator::Elevator() : frc::Subsystem("Elevator") {
      elevatorMotor->Config_kP(0, kP, kTimeoutMS);    //!
      elevatorMotor->Config_kI(0, 0, kTimeoutMS);    //!!
      elevatorMotor->Config_kD(0, 0, kTimeoutMS);    //!!! 
-     elevatorMotor->ConfigMotionCruiseVelocity(350, kTimeoutMS); //!!!!
-     elevatorMotor->ConfigMotionAcceleration(350, kTimeoutMS); //!!!!!
+     elevatorMotor->ConfigMotionCruiseVelocity(731, kTimeoutMS); //!!!!
+     elevatorMotor->ConfigMotionAcceleration(731, kTimeoutMS); //!!!!!
      elevatorMotor->SetSelectedSensorPosition(0, 0, kTimeoutMS); //look into the first value (initial sensor position)
      elevatorMotor->ConfigClearPositionOnLimitR(true, kTimeoutMS);
      elevatorMotor->ConfigClearPositionOnLimitF(false, kTimeoutMS);
      elevatorMotor->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeoutMS);
      elevatorMotor->ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeoutMS);
-     elevatorMotor->ConfigMotionSCurveStrength(3, kTimeoutMS);
+     elevatorMotor->ConfigMotionSCurveStrength(1, kTimeoutMS);
+     elevatorMotor->ConfigForwardSoftLimitThreshold(26950, kTimeoutMS);
 
 }
 
@@ -166,4 +167,22 @@ int Elevator::distanceError(){
 
     return elevatorMotor->GetClosedLoopError();
 
+}
+
+bool Elevator::isOnTarget(){
+
+    double distanceToTarget = elevatorMotor->GetClosedLoopTarget() - elevatorMotor->GetSelectedSensorPosition();
+    int velocity = elevatorMotor->GetSelectedSensorVelocity();
+
+    if(distanceToTarget <= 100 && velocity == 0){
+        return true;
+    }
+
+    else{
+        return false;
+    }
+}
+
+double Elevator::distanceTarget(){
+    return elevatorMotor->GetClosedLoopTarget();
 }

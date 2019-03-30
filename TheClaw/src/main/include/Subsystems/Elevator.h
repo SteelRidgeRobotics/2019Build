@@ -41,17 +41,17 @@ public:
 
 	static constexpr double MIN = 0; 
 
-	static constexpr double HPOS1 = 0;
+	static constexpr double HPOS1 = 0; // for low hatch
 
-	static constexpr double HPOS2 = 17000.0;
+	static constexpr double HPOS2 = 16700.0; //hatch 2 elevator
 
-	static constexpr double HPOS3 = 26950.0; //all these need to be set!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	static constexpr double HPOS3 = 27000.0; 
 
 	static constexpr double CPOS1 = 0;
 
-	static constexpr double CPOS2 = 16000.0;
+	static constexpr double CPOS2 = 17200.0;
 
-	static constexpr double CPOS3 = 26950.0;
+	static constexpr double CPOS3 = 27000.0;
 
 	static constexpr double MAX = 0;
 
@@ -59,9 +59,9 @@ public:
 
 	static const int kSensorUnitsPerRotation = 80;
 
-	static constexpr double kF = 1023.0/701.0;
+	static constexpr double kF = 1023.0/731.0;
 
-	static constexpr double kP = 1.0;
+	static constexpr double kP = 10.0;
 
 	static constexpr double kIzone = 0.0;
 
@@ -102,6 +102,11 @@ public:
 	bool getLimitR();
 
 	int distanceError();
+
+	bool isOnTarget();
+
+	double distanceTarget();
+
 
 
 };

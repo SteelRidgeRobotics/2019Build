@@ -38,15 +38,15 @@ Arm::Arm() : frc::Subsystem("Arm") {
     armMotor->Config_kP(0, kP, kTimeoutMS);    //!
     armMotor->Config_kI(0, 0, kTimeoutMS);    //!!
     armMotor->Config_kD(0, 0, kTimeoutMS);    //!!! 
-    armMotor->ConfigMotionCruiseVelocity(350, kTimeoutMS); //!!!!
-    armMotor->ConfigMotionAcceleration(350, kTimeoutMS); //!!!!!
+    armMotor->ConfigMotionCruiseVelocity(550, kTimeoutMS); //!!!!
+    armMotor->ConfigMotionAcceleration(450, kTimeoutMS); //!!!!!
     armMotor->SetSelectedSensorPosition(0, 0, kTimeoutMS); //look into the first value (initial sensor position)
     armMotor->ConfigForwardSoftLimitThreshold(5685, kTimeoutMS);
     //armMotor->ConfigReverseSoftLimitThreshold(-10000, kTimeoutMS);
     armMotor->ConfigClearPositionOnLimitR(true, kTimeoutMS);
     armMotor->ConfigForwardLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeoutMS);
     armMotor->ConfigReverseLimitSwitchSource(LimitSwitchSource::LimitSwitchSource_FeedbackConnector, LimitSwitchNormal_NormallyOpen, kTimeoutMS);
-    armMotor->ConfigMotionSCurveStrength(3, kTimeoutMS);
+    armMotor->ConfigMotionSCurveStrength(1, kTimeoutMS);
     armMotor->ConfigPeakCurrentLimit(20, kTimeoutMS);
     armMotor->EnableCurrentLimit(true);
 }
@@ -79,9 +79,9 @@ void Arm::userArm(std::shared_ptr<frc::Joystick>SystemsController)
 
     int ArmJoyNum = 5;
 
-    double left_y = -0.5*SystemsController->GetRawAxis(ArmJoyNum);
+    double left_y = -0.4*SystemsController->GetRawAxis(ArmJoyNum);
 
-    if(fabs(left_y) < 0.05)
+    if(fabs(left_y) < 0.1)
     {
         left_y = 0;
     }
@@ -160,4 +160,18 @@ int Arm::distanceError(){
 
 void Arm::armUp(){
     armMotor->Set(ControlMode::PercentOutput, 0.2);
+}
+
+bool Arm::isOnTarget(){
+
+    double distanceToTarget = armMotor->GetClosedLoopTarget() - armMotor->GetSelectedSensorPosition();
+    int velocity = armMotor->GetSelectedSensorVelocity();
+
+    if(distanceToTarget <= 50 && velocity == 0){
+        return true;
+    }
+
+    else{
+        return false;
+    }
 }

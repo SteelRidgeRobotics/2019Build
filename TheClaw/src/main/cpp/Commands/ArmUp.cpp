@@ -37,25 +37,15 @@ void ArmUp::Initialize() {
 
 // Called repeatedly when this Command is scheduled to run
 void ArmUp::Execute() {
-double distance = Robot::arm->findDistance(m_Rotations);
-Robot::arm->motionMagic(distance);
+//double distance = Robot::arm->findDistance(m_Rotations);
+Robot::arm->motionMagic(m_Rotations);
 
 }
 
 // Make this return true when this Command no longer needs to run execute()
 bool ArmUp::IsFinished() {
-/*
-if(Robot::arm->distanceError() <= 10)
-{
-    return true;
-}
 
-else
-{
-    return false;
-}
-*/
-return IsTimedOut();
+return Robot::arm->isOnTarget();
 
 }
 
