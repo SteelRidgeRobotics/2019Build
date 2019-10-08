@@ -28,6 +28,10 @@ Drivetrain::Drivetrain() : frc::Subsystem("Drivetrain") {
     leftside.reset(new frc::SpeedControllerGroup(*frontLeft, *backLeft));
     rightside.reset(new frc::SpeedControllerGroup(*frontRight, *backRight));
 
+    backLeft->Follow(*frontLeft); //left back to follow left front
+    backRight->Follow(*frontRight); //right back to follow right front
+
+
     backLeft->SetNeutralMode(NeutralMode::Brake);
     frontLeft->SetNeutralMode(NeutralMode::Brake);
     backRight->SetNeutralMode(NeutralMode::Brake);
@@ -65,6 +69,7 @@ void Drivetrain::userDrive(std::shared_ptr<frc::Joystick>DriveController)
     double left_y = -1.0*DriveController->GetRawAxis(1);
     double right_y = -1.0*DriveController->GetRawAxis(5);
     int l_bump = DriveController->GetRawButton(5);
+
     
     if (fabs(left_y) < 0.1) {
         left_y = 0;
@@ -78,6 +83,8 @@ void Drivetrain::userDrive(std::shared_ptr<frc::Joystick>DriveController)
         left_y = 0.5*left_y;
         right_y = 0.5*right_y;
     }
+
+
 
     frontLeft->Set(ControlMode::PercentOutput, left_y);
     frontRight->Set(ControlMode::PercentOutput, right_y);
